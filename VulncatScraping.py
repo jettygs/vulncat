@@ -10,7 +10,7 @@ print("데이터를 불러오는 중")
 #웹 서버에 요청하기
 weakness = []
 page = 1
-while (page < 10):
+while (page < 2):
     url = "https://vulncat.fortify.com/ko/weakness?po={}".format(page)
     
     res = requests.get(url)
@@ -34,6 +34,8 @@ while (page < 10):
             content.append(contents[li:li+3])
         
         print(name.text)
+        print(len(languages))
+        print(len(contents))
 
         i = 0
         # lanNum = languages[i]
@@ -45,8 +47,9 @@ while (page < 10):
                 print("내용이 없습니다.")
                 pass
             i += 1
-    print(page, "페이지 스크래핑 완료")        
+    print(page, "페이지 스크래핑 완료")
     page += 1
+    
             
     df = pd.DataFrame(weakness, columns=['취약점명', '언어', '요약', '상세', '참조'])
     today = datetime.today().strftime("%Y%m%d")
@@ -61,9 +64,4 @@ while (page < 10):
         sheet.column_dimensions['C'].width = 50 
         sheet.column_dimensions['D'].width = 50 
         sheet.column_dimensions['E'].width = 50 
-        
-    
-
-
-
 
